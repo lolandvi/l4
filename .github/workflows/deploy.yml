@@ -1,29 +1,26 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
 on:
-  release:
-    types: [published]
+ push:
+  branches:
+   - main
+  tags:
+   - 'v*' # Матч для тегов, начинающихся с "v"
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+ build:
+  runs-on: ubuntu-latest
 
-      - name: Build project
-        run: |
-          npm install
-          npm run build
+  steps:
+   - name: Checkout code
+    uses: actions/checkout@v2
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
+   - name: Build and deploy
+    uses: peaceiris/actions-main@v3
+    with:
+     github_token: ${{ secrets.TOKEN }}
+     publish_dir: ./
+     publish_branch: main
+     tag: ${{ github.ref_name }}
+     create_branch: true
+     create_pull_request: true
