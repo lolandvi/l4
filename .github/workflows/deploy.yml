@@ -5,7 +5,7 @@ on:
   branches:
    - main
   tags:
-   - 'v*' # Матч для тегов, начинающихся с "v"
+   - 'v*' 
 
 jobs:
  build:
@@ -13,17 +13,15 @@ jobs:
 
   steps:
    - name: Checkout code
-    uses: actions/checkout@v2
+     uses: actions/checkout@v2
 
    - name: Build and deploy
-    uses: peaceiris/actions-gh-pages@v3
-    with:
-     # Исправленный секрет
+     uses: peaceiris/actions-gh-pages@v3
+     with:
      github_token: ${{ secrets.GITHUB_TOKEN }}
      publish_dir: ./
      publish_branch: gh-pages
      create_branch: true
      create_pull_request: true
      head: gh-pages 
-
 
