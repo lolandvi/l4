@@ -21,6 +21,7 @@ jobs:
      github_token: ${{ secrets.TOKEN }}
      publish_dir: ./
      publish_branch: gh-pages
-     tag: ${{ github.ref_name }}
      create_branch: true
      create_pull_request: true
+     head: gh-pages 
+
