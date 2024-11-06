@@ -18,7 +18,8 @@ jobs:
    - name: Build and deploy
     uses: peaceiris/actions-gh-pages@v3
     with:
-     github_token: ${{ secrets.TOKEN }}
+     # Исправленный секрет
+     github_token: ${{ secrets.GITHUB_TOKEN }}
      publish_dir: ./
      publish_branch: gh-pages
      create_branch: true
