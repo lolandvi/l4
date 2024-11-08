@@ -1,26 +1,21 @@
-name: Deploy
+name: Publish on GitHub Pages
 
 on:
- push:
-  branches:
-   - main
-  tags:
-   - 'v*' # Матч для тегов, начинающихся с "v"
+  release:
+    types: [created]
 
 jobs:
- build:
-  runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-  steps:
-   - name: Checkout code
-    uses: actions/checkout@v2
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2 
 
-   - name: Build and deploy
-    uses: peaceiris/actions-main@v3
-    with:
-     github_token: ${{ secrets.TOKEN }}
-     publish_dir: ./
-     publish_branch: main
-     tag: ${{ github.ref_name }}
-     create_branch: true
-     create_pull_request: true
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3 
+      with:
+        github_token: ${{ secrets.TOKEN }}
+        publish_dir: ./ 
+        destination_dir: ./${{ github.event.release.tag_name }} 
+
