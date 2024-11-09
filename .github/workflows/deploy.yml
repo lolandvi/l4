@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v2 
 
     - name: Deploy to GitHub Pages
-      uses: lolandvi/l4@v3 
+      uses: lolandvi/l4@v1
       with:
         github_token: ${{ secrets.token}}
         publish_dir: ./ 
